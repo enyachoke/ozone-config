@@ -24,11 +24,6 @@
     <!-- EIP routes -->
     <eipRoutesSenaite>1.0.0-SNAPSHOT</eipRoutesSenaite>
     <eipRoutesOdoo>1.0.0-SNAPSHOT</eipRoutesOdoo>
-
-    <!-- EIP override properties -->
-    <db-event.destinations>direct:odoo-event-listener</db-event.destinations>
-    <create.customer.if.not.exist>false</create.customer.if.not.exist>
-
   </properties>
 
   <dependencies>
@@ -164,28 +159,6 @@
           </execution>
         </executions>
       </plugin>
-
-      <plugin>
-        <groupId>com.atlassian.maven.plugins</groupId>
-        <artifactId>bash-maven-plugin</artifactId>
-        <version>1.0-SNAPSHOT</version>
-        <executions>
-          <execution>
-            <id>test</id>
-            <phase>package</phase>
-            <goals>
-              <goal>run</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <script>
-              sed -i "s/\(db-event\.destinations=\).*\$/\1${db-event.destinations}/" ${distro.baseDir}/eip_config/config/application.properties
-              sed -i "s/\(create\.customer\.if\.not\.exist=\).*\$/\1${create.customer.if.not.exist}/" ${distro.baseDir}/eip_config/config/odoo-config/application.properties
-            </script>
-        </configuration>
-      </plugin>
-
       <!-- packaging the distro as a installable/deployable file -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
